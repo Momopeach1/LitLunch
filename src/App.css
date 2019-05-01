@@ -2,6 +2,118 @@
   text-align: center;
 }
 
+.filter_wrap{
+  height: 600px;
+
+}
+#location_icon{
+  background-image: url("http://cdn.onlinewebfonts.com/svg/img_292413.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: invert(100%);
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 5px;
+}
+.filter_content{
+  height: 600px;
+  width: 40vw;
+  position: fixed;
+   background-color: rgb(230,230,230);
+}
+#joining_event_card{
+  width: 400px;
+  height: auto;
+  min-height: 150px;
+  background-color: white;
+  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+  border-radius: 8px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%,-50%);
+  font-size: 18px;
+  text-align: center;
+  font-family: "Futura";
+  padding-top: 20px;
+  text-transform: uppercase;
+
+  color: rgb(140,140,140);
+ background-color: white;
+  border: 3px solid white;
+
+  font-weight: bold;
+  }
+.confirming_buttons{
+  display: grid;
+  color: white;
+  grid-gap: 0px;
+
+  grid-template-columns: 1fr 1fr;
+  height: 55px;
+  margin-top: 15px;
+  border-top: 3px solid white;
+  grid-gap: 3px;
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+
+}
+.confirming_buttons>div{
+
+ font-family: "Futura";
+ font-size: 16px;
+  padding-top: 16px;
+  border-radius: 5px;
+}
+
+  .cb_join{
+  background-color: rgb(0,200,225);
+  }
+    .cb_cancel{
+  background-color: rgb(220,45,0);
+  }
+
+
+  .cb_join:hover{
+background-color: rgb(0,210,225);
+  }
+    .cb_cancel:hover{
+  background-color: rgb(250,65,0);
+
+    }
+.my_info_banner{
+  position: fixed;
+  top: 80px;
+  width: 100%;
+  height: 40px;
+  padding-top: 10px;
+  color: white;
+
+  background-color: rgb(100,195,100);
+  font-weight: bold;
+  font-family: "Avenir";
+  font-size: 16px;
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  z-index: 10;
+  text-align: center;
+}
+.view-wrap{
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  padding: 10px;
+  grid-gap: 20px;
+  padding-top: 140px;
+
+
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -23,6 +135,18 @@
   color: #61dafb;
 }
 
+@media (max-width: 900px){
+.view-wrap{
+
+  grid-template-columns: 1fr;
+ 
+}
+.filter_content{
+  
+  position: static;
+  width: 100%;
+}
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

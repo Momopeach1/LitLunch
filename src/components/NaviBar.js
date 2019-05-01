@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Input, Menu } from 'semantic-ui-react'
+import { Input, Menu } from 'semantic-ui-react';
+import './navbar_wrap_semantic.scss';
 
 export default class MenuExampleSecondary extends Component {
   state = { activeItem: 'home' }
@@ -10,20 +11,21 @@ export default class MenuExampleSecondary extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu secondary>
+      <div className = "navbar-wrap-semantic">
+      <Menu secondary id = "menu">
         <Menu.Item 
         name='home' 
         active={activeItem === 'home'} 
         onClick={this.handleItemClick} 
         />
         <Menu.Item
-          name='messages'
-          active={activeItem === 'messages'}
+          name='create'
+          active={activeItem === 'create'}
           onClick={this.handleItemClick}
         />
         <Menu.Item
-          name='Active Events'
-          active={activeItem === 'friends'}
+          name='browse'
+          active={activeItem === 'browse'}
           onClick={this.handleItemClick}
         />
         <Menu.Menu position='right'>
@@ -31,12 +33,13 @@ export default class MenuExampleSecondary extends Component {
             <Input icon='search' placeholder='Search...' />
           </Menu.Item>
           <Menu.Item
-            name='logout'
-            active={activeItem === 'logout'}
+            name='1832871'
+            active={activeItem === '1032X871'}
             onClick={this.handleItemClick}
           />
         </Menu.Menu>
       </Menu>
+      </div>
     )
   }
 }
