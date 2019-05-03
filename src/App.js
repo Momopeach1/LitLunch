@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Events from './components/Events';
 import NaviBar from './components/NaviBar';
+import Filter from './components/Filter';
 //import { Route, Switch } from 'react-router-dom';
 // <Switch>
 //   <Route exact path="/" component={JoinEvents} />
@@ -23,7 +24,7 @@ class App extends Component {
         <NaviBar/>
         <div className = "my_info_banner"><div id = "location_icon"></div><p style = {{"display": "inline-block","vertical-align": "top;"}}><i>695 Park Ave, New York, NY 10065</i></p></div>
         <div className = "view-wrap">
-        	<div className = "filter_wrap"><div className = "filter_content"></div></div>
+        	<div className = "filter_wrap"><div className = "filter_content"><Filter /></div></div>
 	        <div className = "events_wrap">
 	      	  <Events/>
 	        </div>
