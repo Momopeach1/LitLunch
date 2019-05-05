@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import EventCard from './components/EventCard';
+import withFirebaseAuth from 'react-with-firebase-auth'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import firebaseConfig from './firebaseConfig';
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 class App extends Component {
 /// /events/:id/signup
@@ -234,7 +240,8 @@ POST
       method: "POST",
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization':this.props.user.ra
       },
       body: JSON.stringify({password:app.state.password})
     }).then(function(res){
@@ -265,8 +272,16 @@ POST
   }
 
   render() {
+        const {
+      user,
+      signOut,
+      signInWithGoogle,
+} = this.props;
     return (
-      <div>
+      <div className = "App">
+          {
+            user
+              ?       <div>
         <button onClick = {this.createEvent}>Test Create Event</button>
         <button onClick = {this.getRegisteredEvents}>Test getRegisteredEvents</button>
         <button onClick = {this.getRegisteredEventWithId}>Test getRegisteredEventWithId</button>
@@ -277,8 +292,25 @@ POST
         <button onClick = {this.newCreatedEvent}>Test newCreatedEvent</button>
         <button onClick = {this.editCreatedEvent}>Test editCreatedEvent</button>
       </div>
+              : <p>Please sign in.</p>
+          }
+
+          {
+            user
+              ? <button onClick={signOut}>Sign out</button>
+              : <button onClick={signInWithGoogle}>Sign in with Google</button>
+          }
+</div>
     );
   }
 }
+const firebaseAppAuth = firebaseApp.auth();
 
-export default App;
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider(),
+};
+
+export default withFirebaseAuth({
+  providers,
+  firebaseAppAuth,
+})(App);
