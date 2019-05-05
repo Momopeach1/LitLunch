@@ -5,10 +5,12 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "contentful": "^7.5.0",
+    "firebase": "^5.11.1",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "2.1.8",
+    "react-with-firebase-auth": "^1.0.2",
     "semantic": "0.0.1",
     "semantic-ui": "^2.4.2",
     "semantic-ui-css": "^2.4.1",

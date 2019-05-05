@@ -1,6 +1,9 @@
     
 import React, {Component} from 'react';
 import EventCard from './EventCard';
+import * as firebase from 'firebase/app';
+import firebaseConfig from '../firebaseConfig';
+
 
 
 class Events extends Component{
@@ -12,27 +15,56 @@ class Events extends Component{
       displayJoining:false
     }
     this.joinEvent = this.joinEvent.bind(this);
+    this.newRegisteredEvent = this.newRegisteredEvent.bind(this);
     this.confirmJoin = this.confirmJoin.bind(this);
   }
+  newRegisteredEvent(){
+    let app = this;
+    console.log("https://us-central1-litlunch.cloudfunctions.net/litlunch/events/" + this.state.event_id + "/join", this.props.user.ra);
 
+    fetch("https://us-central1-litlunch.cloudfunctions.net/litlunch/events/" + this.state.event_id + "/join",{
+      method: "POST",
+       headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization':this.props.user.ra
+      },body: JSON.stringify({displayName:this.props.user.displayName})
+    }).then(function(res){
+      return res.json();
+    }).then(function(res){
+      //app.setState({"events":res});
+      console.log(res);
+
+    })
+  }
 
     componentDidMount(){
-    fetch("https://us-central1-litlunch.cloudfunctions.net/litlunch/events/").then((res)=>{return res.json()}).then((data)=>{this.setState({"events":data}); console.log(data)});
+    let a = this;
+      firebase.database().ref("events").on("value", function(snap){
+        if(snap.val()==null)
+          return;
+        else
+          a.setState({"events":snap.val()})
+      })
+    //fetch("https://us-central1-litlunch.cloudfunctions.net/litlunch/events/").then((res)=>{return res.json()}).then((data)=>{this.setState({"events":data}); console.log(data)});
   }
 
 
-  joinEvent (cf){
-    this.setState({"displayJoining":true, "currentFocus":cf});
+  joinEvent (cf, e_id){
+    console.log(cf, e_id);
+    this.setState({"displayJoining":true, "currentFocus":cf, "event_id":e_id});
    }
    confirmJoin(){
+    this.newRegisteredEvent();
     this.setState({"displayJoining":false});
    }
   render(){
     let rendered_events = [];
    for(let event in this.state.events) {
 
-      let temp = (<EventCard url_img =  {this.state.events[event].img_url}  joinEvent = {this.joinEvent} member_count = {this.state.events[event].member_count} time = {this.state.events[event].time} location = {this.state.events[event].restaurant}/>);
+      let temp = (<EventCard event_id = {event} url_img =  {this.state.events[event].img_url}  joinEvent = {this.joinEvent} member_count = {this.state.events[event].member_count} time = {this.state.events[event].time} location = {this.state.events[event].restaurant}/>);
       rendered_events.push(temp);
+      console.log(this.state.events[event]);
     }
 
 

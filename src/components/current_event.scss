@@ -1,0 +1,80 @@
+
+.current_event  *{
+	box-sizing: border-box;
+	margin: 0 ;
+	padding: 0;
+
+}.current_event_wrap{
+	position: absolute;
+	top: 50%;
+	width: 100%;
+	transform: translateY(-50%);
+
+}
+.current_event{
+	text-align: center;
+	font-family: "Futura";
+	padding: 30px;
+	
+}
+.restaurant_name{
+	font-family: "DIN Condensed";
+	font-size: 10vmin;
+	padding: 0 !important;
+	text-transform: uppercase;
+	text-decoration: underline;
+
+}
+.restaurant_time{
+font-family: "DIN Condensed";
+	font-size: 13vmin;
+	padding: 0 !important;
+	margin-bottom: -20px !important;
+	text-transform: uppercase;
+
+}
+.restaurant_leave{
+	border: none;
+	background-color: red;
+	color: white;
+	padding: 10px;
+	font-size: 30px;
+	font-weight: bold;
+	margin-top: 20px;
+	border-radius: 6px;
+}
+.restaurant_leave:hover{
+background-color: rgb(230,0,0);
+}
+.current_members{
+	list-style-type: none;
+	padding: 0px;
+	font-size: 3vmin;
+	display: inline-block;
+
+
+}
+.current_members > li{
+	background-color: black;
+	color: white;
+	display: block;
+	clear: both;
+	margin-bottom: 10px;
+	padding: 10px;
+	border-radius: 8px;
+}
+.current_event_wrap_grid{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 5px;
+}
+.current_event_wrap_grid_enc_a{
+	text-align: right;
+	border-right: 3px solid black;
+	padding-right: 20px !important;
+}
+.current_event_wrap_grid_enc_b{
+	text-transform: uppercase;
+	text-align: left;
+	padding-left: 20px !important;
+}

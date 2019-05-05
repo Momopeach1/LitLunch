@@ -19,13 +19,13 @@ class EventCard extends Component{
               <Card.Meta>{this.props.time}</Card.Meta>
               <Card.Description>
                 Momo wants to Have lunch at <strong style = {{"text-transform":"uppercase"}}>{this.props.location}</strong>
-                {parseInt(this.props.member_count) > 1 ? " with " + parseInt(this.props.member_count) + " other users!" :""}
+                {parseInt(this.props.member_count) > 1 ? " with " + parseInt(this.props.member_count-1) + " more!" :""}
               </Card.Description>
             </Card.Content>
 
             <Card.Content extra>
               <div className='ui two buttons'>
-                <Button id = "join_button" onClick = {()=>{this.props.joinEvent(this.props.location)}}>
+                <Button id = "join_button" onClick = {()=>{this.props.joinEvent(this.props.location, this.props.event_id)}}>
                   Join
                 </Button>
                 <Button id = "info_button">
