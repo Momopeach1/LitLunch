@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Events from './components/Events';
 import NaviBar from './components/NaviBar';
+import Filter from './components/Filter';
 import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -35,7 +36,7 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 class App extends Component {
 
 
-  
+
   render() {
             const {
       user,
@@ -51,7 +52,7 @@ class App extends Component {
                   <NaviBar user_name = {user.displayName} signOut = {signOut}/>
                   <div className = "my_info_banner"><div id = "location_icon"></div><p style = {{"display": "inline-block","vertical-align": "top;"}}><i>695 Park Ave, New York, NY 10065</i></p></div>
                   <div className = "view-wrap">
-                    <div className = "filter_wrap"><div className = "filter_content"></div></div>
+                    <div className = "filter_wrap"><div className = "filter_content"><Filter /></div></div>
                     <div className = "events_wrap">
                       <Events user = {user}/>
                     </div>
