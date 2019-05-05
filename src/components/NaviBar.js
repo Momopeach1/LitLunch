@@ -29,15 +29,17 @@ export default class MenuExampleSecondary extends Component {
           onClick={this.handleItemClick}
         />
         <Menu.Menu position='right'>
-          <Menu.Item>
-            <Input icon='search' placeholder='Search...' />
-          </Menu.Item>
           <Menu.Item
-            name='1832871'
-            active={activeItem === '1032X871'}
+            name={this.props.user_name}
+            active={activeItem === this.props.user_name}
             onClick={this.handleItemClick}
           />
         </Menu.Menu>
+        <Menu.Item 
+        name='Sign Out' 
+        active={activeItem === 'Sign Out'} 
+        onClick={this.props.signOut} 
+        />
       </Menu>
       </div>
     )
