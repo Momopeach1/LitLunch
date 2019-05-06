@@ -1,5 +1,6 @@
     
 import React, {Component} from 'react';
+import './style.css'
 
 class CreateEvents extends Component{
 
@@ -8,16 +9,36 @@ class CreateEvents extends Component{
     this.myFunction = this.myFunction.bind(this);
     this.submitData = this.submitData.bind(this);
     this.DoSomething = this.DoSomething.bind(this);
+    this.createEvent = this.createEvent.bind(this);
+    this.state = {
+      "date":""
+    }
 
 
   }
 
+    createEvent(start, end, restaurant_name, restaurant_location, description){
+      console.log(start, end, restaurant_name, restaurant_location, description);
+    /*let app = this;
+    fetch("https://us-central1-litlunch.cloudfunctions.net/litlunch/events/new",{
+      method: "POST",
+       headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization':this.props.user.ra
+      },
+      body: JSON.stringify({username:app.props.user.uid, zipcode:app.state.zipcode, start:app.state.start, end:app.state.end, restaurant_name:app.state.restaurant_name, restaurant_location:app.state.restaurant_location, description:app.state.description})
+    }).then(function(res){
+      return res.json();
+    }).then(function(res){
+      //app.setState({"events":res});
+      console.log(res);
+
+    })*/
+  }
+
   submitData(){
-    console.log(document.getElementById("zip_code").value);
-    console.log(document.getElementById("user_name").value);
-    console.log(document.getElementById("start_time").value);
-    console.log(document.getElementById("end_time").value);
-    console.log(document.getElementById("description").value);
+    this.createEvent((document.getElementById("start_day").value), (document.getElementById("end_time").value), "starbucks", "4348 156 w egh gu", (document.getElementById("description").value));
   }
 
 
@@ -53,48 +74,20 @@ window.onclick = function(event) {
 
 
   render(){
-    return (<div>
+    return (
+<div>
 
-      <div class="bg-modal">
-  <div class="modal-contents">
-          <div className="close" onClick = {this.DoSomething}>+</div>
-          <form action="">
-
-      <input id = "user_name" type="text" placeholder="User name"/>
-      <input id = "zip_code" type="text" placeholder="ZipCode"/>
-       start of the event
-       <input id = "start_time" type="datetime-local" name="min time"/> 
-       End of the event <input id = "end_time"  type="datetime-local" placeholder="max Wait"/>
-      <input id = "description" type="text" placeholder="Description"/>
-      <a href="#" class="button" onClick ={this.submitData}>Submit</a>
-    </form>
-    </div>
-    </div>
-
-
-
-    	<section class="hero">
-
-</section>
-<section class="hero">
-  <div class="hero-content">
-   <a href="#" id="button" class="button" onClick = {this.DoSomething}>Click Me</a>
-  </div>
-  <div class="dropdown">
-  <button onClick={this.myFunction} className="dropbtn">Dropdown</button>
-  <div id="myDropdown" class="dropdown-content">
-    <li><a href="">Home</a></li>
-    <li><a href="">About</a></li>
-    <li><a href="">Blog</a></li>
-    <li><a href="">Signup</a></li>
-    <li><a href="">Contact</a></li>
-
-
-  </div>
+<div className="bg-modal">
+<div className="modal-contents">
+ <input id = "start_day"  type="date" placeholder="max Wait"/>
+ <input id = "start_time" type="time" placeholder = "when"/> 
+ <input id = "end_time"   type="time" placeholder="max Wait"/>
+ <input id = "description" type="text" placeholder="Description"/>
+<a href="#" class="button" onClick ={this.submitData}>Submit</a>
 </div>
-</section>
-
-  </div>);
+</div>
+</div>
+);
   }
 }
 

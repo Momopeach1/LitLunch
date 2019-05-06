@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Events from './components/Events';
 import NaviBar from './components/NaviBar';
+import CreateEvent from './components/CreateEvent';
 import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
@@ -53,7 +54,7 @@ class App extends Component {
                   <div className = "view-wrap">
                     <div className = "filter_wrap"><div className = "filter_content"></div></div>
                     <div className = "events_wrap">
-                      <Events user = {user}/>
+                      <CreateEvent user = {user}/>
                     </div>
                   </div>
                 </div>
