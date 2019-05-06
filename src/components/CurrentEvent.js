@@ -88,7 +88,7 @@ class CurrentEvent extends Component {
 									<p className = "brief_intro">LITLUNCH AT</p>
 									<p className = "restaurant_time">3:00pm</p>
 									<p className = "restaurant_name">{this.state.current_event_info[this.state.current_event].restaurant}</p>
-									<p className = "restaurant_location">{this.state.current_event_info[this.state.current_event].address}</p>
+									<p className = "restaurant_location">{this.state.current_event_info[this.state.current_event].location}</p>
 									<p className = "restaurant_desc">{this.state.current_event_info[this.state.current_event].description}</p>
 									<button className = "restaurant_leave" onClick = {this.leaveRegisteredEvent}>Cancel</button>
 								</div>

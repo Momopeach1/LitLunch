@@ -1,4 +1,5 @@
-h1, h3 {
+.bg-modal {
+  h1, h3 {
   color: white;
   font-weight: 400;
 }
@@ -38,13 +39,13 @@ li a:hover {
 }
 
 
-.bg-modal {
+
   width: 100%;
   height: auto;
   
   justify-content: center;
   align-items: center;
-}
+
 
 .modal-contents {
   height: auto;
@@ -55,13 +56,28 @@ li a:hover {
   position: relative;
   border-radius: 4px;
 }
+p{
+  font-size: 18px;
+font-weight: bold;
+background-color: black;
+color: white;
+display: inline-block;
+clear: both;
+border-radius: 5px;
+padding: 10px;
+
+}
+
 
 input {
   margin: 15px auto;
   display: block;
-  width: 65%;
+  width: 100%;
   padding: 8px;
-  border: 1px solid gray;
+  border: none;
+  border-bottom: 1px solid gray;
+  font-size: 40px;
+  text-align: center;
 }
 
 .close {
@@ -118,3 +134,4 @@ input {
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
+}

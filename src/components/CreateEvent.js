@@ -1,6 +1,6 @@
     
 import React, {Component} from 'react';
-import './style.css'
+import './style.scss'
 
 class CreateEvents extends Component{
 
@@ -17,9 +17,9 @@ class CreateEvents extends Component{
 
   }
 
-    createEvent(start, end, restaurant_name, restaurant_location, description){
-      console.log(start, end, restaurant_name, restaurant_location, description);
-    /*let app = this;
+    createEvent(img_url, start, end, restaurant_name, restaurant_location, description){
+      console.log(this.props.user.displayName, start, end, restaurant_name, restaurant_location, description);
+    let app = this;
     fetch("https://us-central1-litlunch.cloudfunctions.net/litlunch/events/new",{
       method: "POST",
        headers: {
@@ -27,18 +27,18 @@ class CreateEvents extends Component{
         'Content-Type': 'application/json',
         'Authorization':this.props.user.ra
       },
-      body: JSON.stringify({username:app.props.user.uid, zipcode:app.state.zipcode, start:app.state.start, end:app.state.end, restaurant_name:app.state.restaurant_name, restaurant_location:app.state.restaurant_location, description:app.state.description})
+      body: JSON.stringify({img_url:img_url, username:app.props.user.displayName, zipcode:10000, start:start, end:end, restaurant_name:restaurant_name, restaurant_location:restaurant_location, description:description})
     }).then(function(res){
       return res.json();
     }).then(function(res){
       //app.setState({"events":res});
       console.log(res);
 
-    })*/
+    })
   }
 
   submitData(){
-    this.createEvent((document.getElementById("start_day").value), (document.getElementById("end_time").value), "starbucks", "4348 156 w egh gu", (document.getElementById("description").value));
+    this.createEvent(this.props.img_url, (document.getElementById("start_day").value), (document.getElementById("end_time").value), this.props.restaurant,this.props.location, (document.getElementById("description").value));
   }
 
 
@@ -79,8 +79,11 @@ window.onclick = function(event) {
 
 <div className="bg-modal">
 <div className="modal-contents">
+<p>DATE</p>
  <input id = "start_day"  type="date" placeholder="max Wait"/>
+ <p>START TIME</p>
  <input id = "start_time" type="time" placeholder = "when"/> 
+ <p>END TIME</p>
  <input id = "end_time"   type="time" placeholder="max Wait"/>
  <input id = "description" type="text" placeholder="Description"/>
 <a href="#" class="button" onClick ={this.submitData}>Submit</a>

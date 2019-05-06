@@ -18,7 +18,7 @@ class EventCard extends Component{
               <Card.Header style = {{"text-transform":"uppercase","padding-top":"30px","font-size":"30px","font-family":"Futura","font-weight":"bold"}}>{this.props.location}</Card.Header>
               <Card.Meta>{this.props.time}</Card.Meta>
               <Card.Description>
-                Momo wants to Have lunch at <strong style = {{"text-transform":"uppercase"}}>{this.props.location}</strong>
+                {this.props.creator} wants to Have lunch at <strong style = {{"text-transform":"uppercase"}}>{this.props.location}</strong>
                 {parseInt(this.props.member_count) > 1 ? " with " + parseInt(this.props.member_count-1) + " more!" :""}
               </Card.Description>
             </Card.Content>

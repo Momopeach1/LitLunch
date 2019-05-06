@@ -6,6 +6,7 @@ import firebaseConfig from '../firebaseConfig';
 
 
 
+
 class Events extends Component{
 
   constructor(){
@@ -62,14 +63,14 @@ class Events extends Component{
     let rendered_events = [];
    for(let event in this.state.events) {
 
-      let temp = (<EventCard event_id = {event} url_img =  {this.state.events[event].img_url}  joinEvent = {this.joinEvent} member_count = {this.state.events[event].member_count} time = {this.state.events[event].time} location = {this.state.events[event].restaurant}/>);
+      let temp = (<EventCard event_id = {event} creator =  {this.state.events[event].creator} url_img =  {this.state.events[event].img_url}  joinEvent = {this.joinEvent} member_count = {this.state.events[event].member_count} time = {this.state.events[event].time} location = {this.state.events[event].restaurant}/>);
       rendered_events.push(temp);
       console.log(this.state.events[event]);
     }
+rendered_events.reverse();
 
 
-
-    return (<div>
+    return (<div className = "view_wrapb">
             <div id = "joining_event_card" style = {{"display": this.state.displayJoining?"block":"none"}}>
             <p>Confirm joining event at<br/> {this.state.currentFocus}?</p>
             <div class = "confirming_buttons"><div className= "cb_join" onClick = {this.confirmJoin}>Join</div><div  className= "cb_cancel" onClick = {this.confirmJoin}>Cancel</div></div>
