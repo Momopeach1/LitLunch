@@ -13,7 +13,6 @@ import firebaseConfig from './firebaseConfig';
 
 import {BrowserRouter as Router} from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
@@ -51,7 +50,6 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 class App extends Component {
 
-  
   render() {
             const {
       user,

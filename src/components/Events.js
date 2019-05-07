@@ -2,7 +2,6 @@
 import React, {Component} from 'react';
 import EventCard from './EventCard';
 import * as firebase from 'firebase/app';
-import firebaseConfig from '../firebaseConfig';
 
 
 
@@ -12,7 +11,7 @@ class Events extends Component{
   constructor(){
     super();
     this.state = {
-      events:[{name:"2"}],
+      events:[],
       displayJoining:false
     }
     this.joinEvent = this.joinEvent.bind(this);
@@ -20,7 +19,7 @@ class Events extends Component{
     this.confirmJoin = this.confirmJoin.bind(this);
   }
   newRegisteredEvent(){
-    let app = this;
+
     console.log("https://us-central1-litlunch.cloudfunctions.net/litlunch/events/" + this.state.event_id + "/join", this.props.user.ra);
 
     fetch("https://us-central1-litlunch.cloudfunctions.net/litlunch/events/" + this.state.event_id + "/join",{
@@ -42,10 +41,13 @@ class Events extends Component{
     componentDidMount(){
     let a = this;
       firebase.database().ref("events").on("value", function(snap){
-        if(snap.val()==null)
+        if(snap.val()==null){
+           a.setState({"events":[]})
           return;
-        else
+        }
+        else{
           a.setState({"events":snap.val()})
+        }
       })
     //fetch("https://us-central1-litlunch.cloudfunctions.net/litlunch/events/").then((res)=>{return res.json()}).then((data)=>{this.setState({"events":data}); console.log(data)});
   }
@@ -75,7 +77,9 @@ rendered_events.reverse();
             <p>Confirm joining event at<br/> {this.state.currentFocus}?</p>
             <div class = "confirming_buttons"><div className= "cb_join" onClick = {this.confirmJoin}>Join</div><div  className= "cb_cancel" onClick = {this.confirmJoin}>Cancel</div></div>
             </div>
+            <div className = "view_events_grid">
            {rendered_events}
+           </div>
           </div>);
   }
 }

@@ -1,17 +1,29 @@
-    
+
 import React, {Component} from 'react';
-import './style.scss'
+import './style.scss';
+import { Button } from 'semantic-ui-react';
 
 class CreateEvents extends Component{
 
   constructor(){
     super();
+     let currDateConstructor = new Date(Date.now());
+     let hoursConstructor = currDateConstructor.getHours();
+    let minutesConstructor = currDateConstructor.getMinutes();
+     let mindateConstructor = ""+ currDateConstructor.getFullYear() + "-" + ((currDateConstructor.getMonth()+1) <=9 ? ('0'+(currDateConstructor.getMonth()+1)):(currDateConstructor.getMonth()+1)) + "-" + (currDateConstructor.getDate() <= 9 ? ('0'+currDateConstructor.getDate()):currDateConstructor.getDate());
+
+    let minTimeConstructor = "" + (hoursConstructor<=9?"0"+(hoursConstructor):hoursConstructor) + ":" + (minutesConstructor<=9?"0"+minutesConstructor:minutesConstructor);
+
     this.myFunction = this.myFunction.bind(this);
     this.submitData = this.submitData.bind(this);
     this.DoSomething = this.DoSomething.bind(this);
     this.createEvent = this.createEvent.bind(this);
     this.state = {
-      "date":""
+      "date":"",
+      "start_time":""+minTimeConstructor,
+      "end_time":""+minTimeConstructor,
+      "dateDisplay":""+mindateConstructor,
+      "description":""
     }
 
 
@@ -38,6 +50,20 @@ class CreateEvents extends Component{
   }
 
   submitData(){
+/*
+if(!document.getElementById("start_day").checkValidity())
+return
+
+if(!document.getElementById("end_time").checkValidity())
+return
+
+if(!document.getElementById("description").checkValidity())
+return*/
+
+
+
+
+
     this.createEvent(this.props.img_url, (document.getElementById("start_day").value), (document.getElementById("end_time").value), this.props.restaurant,this.props.location, (document.getElementById("description").value));
   }
 
@@ -50,6 +76,19 @@ document.getElementById('button').addEventListener("click", function() {
 document.querySelector('.close').addEventListener("click", function() {
   document.querySelector('.bg-modal').style.display = "none";
 });
+  }
+
+ handleStartTime = e => {
+    this.setState({start_time: e.target.value});
+  }
+   handleEndTime = e => {
+    this.setState({end_time: e.target.value});
+  }
+   handleDate = e => {
+    this.setState({dateDisplay: e.target.value});
+  }
+    handleDesc = e => {
+    this.setState({description: e.target.value});
   }
 
   myFunction(){
@@ -73,20 +112,28 @@ window.onclick = function(event) {
 
 
 
+
   render(){
+    let currDate = new Date(Date.now());
+    let hours = currDate.getHours();
+    let minutes = currDate.getMinutes();
+    //max="1979-12-31"
+    let min = ""+ currDate.getFullYear() + "-" + ((currDate.getMonth()+1) < 9 ? ('0'+(currDate.getMonth()+1)):(currDate.getMonth()+1)) + "-" + (currDate.getDate() < 9 ? ('0'+currDate.getDate()):currDate.getDate());
+    let minTime = "" + hours + ":" + minutes;
+    console.log(minTime);
     return (
 <div>
 
 <div className="bg-modal">
 <div className="modal-contents">
 <p>DATE</p>
- <input id = "start_day"  type="date" placeholder="max Wait"/>
+ <input id = "start_day" type="date" min={min} required value = {this.state.dateDisplay} onChange={this.handleDate}/>
  <p>START TIME</p>
- <input id = "start_time" type="time" placeholder = "when"/> 
+ <input id = "start_time" type="time" min = {minTime} required value = {this.state.start_time} onChange={this.handleStartTime}/> 
  <p>END TIME</p>
- <input id = "end_time"   type="time" placeholder="max Wait"/>
- <input id = "description" type="text" placeholder="Description"/>
-<a href="#" class="button" onClick ={this.submitData}>Submit</a>
+ <input id = "end_time"   type="time" min = {minTime} required value = {this.state.end_time} onChange={this.handleEndTime}/>
+ <input id = "description" type="text" minlength = {1} required placeholder="Description" value = {this.state.description} onChange={this.handleDesc}/>
+<Button disabled = {((document.getElementById("description")&&document.getElementById("start_day")&&document.getElementById("end_time")&&document.getElementById("start_time"))&&(!document.getElementById("start_day").checkValidity()||!document.getElementById("end_time").checkValidity()||!document.getElementById("start_time").checkValidity()||document.getElementById("description").value.length<1))} color="blue" onClick ={this.submitData}>Create</Button>
 </div>
 </div>
 </div>

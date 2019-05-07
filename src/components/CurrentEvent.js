@@ -1,7 +1,6 @@
     
 import React, {Component} from 'react';
 import * as firebase from 'firebase/app';
-import firebaseConfig from '../firebaseConfig';
 import './current_event.scss';
 
 //import { Route, Switch } from 'react-router-dom';
