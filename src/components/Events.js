@@ -17,6 +17,7 @@ class Events extends Component{
     this.joinEvent = this.joinEvent.bind(this);
     this.newRegisteredEvent = this.newRegisteredEvent.bind(this);
     this.confirmJoin = this.confirmJoin.bind(this);
+    this.cancelJoin = this.cancelJoin.bind(this);
   }
   newRegisteredEvent(){
 
@@ -61,11 +62,14 @@ class Events extends Component{
     this.newRegisteredEvent();
     this.setState({"displayJoining":false});
    }
+    cancelJoin(){
+    this.setState({"displayJoining":false});
+   }
   render(){
     let rendered_events = [];
    for(let event in this.state.events) {
 
-      let temp = (<EventCard event_id = {event} creator =  {this.state.events[event].creator} url_img =  {this.state.events[event].img_url}  joinEvent = {this.joinEvent} member_count = {this.state.events[event].member_count} time = {this.state.events[event].time} location = {this.state.events[event].restaurant}/>);
+      let temp = (<EventCard event_id = {event}  location = {this.state.events[event].location}  date = {this.state.events[event].date}  end = {this.state.events[event].end}  start = {this.state.events[event].start} desc ={this.state.events[event].description}  creator =  {this.state.events[event].creator} url_img =  {this.state.events[event].img_url}  joinEvent = {this.joinEvent} member_count = {this.state.events[event].member_count} time = {this.state.events[event].time} restaurant = {this.state.events[event].restaurant}/>);
       rendered_events.push(temp);
       console.log(this.state.events[event]);
     }
@@ -75,7 +79,7 @@ rendered_events.reverse();
     return (<div className = "view_wrapb">
             <div id = "joining_event_card" style = {{"display": this.state.displayJoining?"block":"none"}}>
             <p>Confirm joining event at<br/> {this.state.currentFocus}?</p>
-            <div class = "confirming_buttons"><div className= "cb_join" onClick = {this.confirmJoin}>Join</div><div  className= "cb_cancel" onClick = {this.confirmJoin}>Cancel</div></div>
+            <div class = "confirming_buttons"><div className= "cb_join" onClick = {this.confirmJoin}>Join</div><div  className= "cb_cancel" onClick = {this.cancelJoin}>Cancel</div></div>
             </div>
             <div className = "view_events_grid">
            {rendered_events}

@@ -55,14 +55,7 @@ class Filter extends Component {
                   onChange= {this.handleZIP}
                   placeholder='Enter ZIP Code'
                 />
-                <Divider horizontal>Or</Divider>
-                <Button color="blue">Get Current Location</Button></div>
-              </Segment>
-              <Segment attached>
-                <Header as="h3">Cuisine</Header>
-                <Checkbox label='American' />
-                <br/><Checkbox label='Chinese' />
-                <br/><Checkbox label='Mexican' />
+              </div>
               </Segment>
               <Segment attached>
                 <Header as="h3">Price</Header>
@@ -74,12 +67,7 @@ class Filter extends Component {
                   <Button onClick={this.handlePrice} value={5}>$$$$$</Button>
                 </Button.Group>
               </Segment>
-              <Segment attached>
-                <Header as="h3">Rating</Header>
-                <input type='range' min={0} max={5} value={rating} onChange={this.handleChange} />
-                <br />
-                <Rating icon="star" size="massive" rating={this.state.rating} maxRating={5} />
-              </Segment>
+
               <Segment attached='bottom'>
                  <Button onClick={()=>{this.props.submit_filter(this.state.rating, this.state.price, this.state.zipCode)}} value={1}>search</Button>
               </Segment>

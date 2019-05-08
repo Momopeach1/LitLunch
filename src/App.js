@@ -69,7 +69,7 @@ class App extends Component {
                               <NaviBar user_name = {user.displayName} signOut = {signOut}/>
 
 
-                              <div className = "my_info_banner"><div id = "location_icon"></div><p style = {{"display": "inline-block","vertical-align": "top;"}}><i>695 Park Ave, New York, NY 10065</i></p></div>
+                              <div className = "my_info_banner"><p style = {{"display": "inline-block","vertical-align": "top;"}}><i>LITLUNCH</i></p></div>
                              
 
 

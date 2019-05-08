@@ -29,7 +29,7 @@ class CreateEvents extends Component{
 
   }
 
-    createEvent(img_url, start, end, restaurant_name, restaurant_location, description){
+    createEvent(img_url, date, start, end, restaurant_name, restaurant_location, description){
       console.log(this.props.user.displayName, start, end, restaurant_name, restaurant_location, description);
     let app = this;
     fetch("https://us-central1-litlunch.cloudfunctions.net/litlunch/events/new",{
@@ -39,7 +39,7 @@ class CreateEvents extends Component{
         'Content-Type': 'application/json',
         'Authorization':this.props.user.ra
       },
-      body: JSON.stringify({img_url:img_url, username:app.props.user.displayName, zipcode:10000, start:start, end:end, restaurant_name:restaurant_name, restaurant_location:restaurant_location, description:description})
+      body: JSON.stringify({ofs:240, date:date, img_url:img_url, username:app.props.user.displayName, zipcode:10000, start:start, end:end, restaurant_name:restaurant_name, restaurant_location:restaurant_location, description:description})
     }).then(function(res){
       return res.json();
     }).then(function(res){
@@ -63,8 +63,7 @@ return*/
 
 
 
-
-    this.createEvent(this.props.img_url, (document.getElementById("start_day").value), (document.getElementById("end_time").value), this.props.restaurant,this.props.location, (document.getElementById("description").value));
+    this.createEvent(this.props.img_url, (document.getElementById("start_day").value), (document.getElementById("start_time").value), (document.getElementById("end_time").value), this.props.restaurant,this.props.location, (document.getElementById("description").value));
   }
 
 
@@ -118,22 +117,25 @@ window.onclick = function(event) {
     let hours = currDate.getHours();
     let minutes = currDate.getMinutes();
     //max="1979-12-31"
-    let min = ""+ currDate.getFullYear() + "-" + ((currDate.getMonth()+1) < 9 ? ('0'+(currDate.getMonth()+1)):(currDate.getMonth()+1)) + "-" + (currDate.getDate() < 9 ? ('0'+currDate.getDate()):currDate.getDate());
-    let minTime = "" + hours + ":" + minutes;
-    console.log(minTime);
+    let min = ""+ currDate.getFullYear() + "-" + ((currDate.getMonth()+1) <= 9 ? ('0'+(currDate.getMonth()+1)):(currDate.getMonth()+1)) + "-" + (currDate.getDate() <= 9 ? ('0'+currDate.getDate()):currDate.getDate());
+    
+    let minTime = "" + (hours<=9?"0"+(hours):hours) + ":" + (minutes<=9?"0"+minutes:minutes);
+
+
+    
     return (
 <div>
 
 <div className="bg-modal">
 <div className="modal-contents">
 <p>DATE</p>
- <input id = "start_day" type="date" min={min} required value = {this.state.dateDisplay} onChange={this.handleDate}/>
+ <input id = "start_day" type="date" min={this.state.dateDisplay} required value = {this.state.dateDisplay} onChange={this.handleDate}/>
  <p>START TIME</p>
  <input id = "start_time" type="time" min = {minTime} required value = {this.state.start_time} onChange={this.handleStartTime}/> 
  <p>END TIME</p>
- <input id = "end_time"   type="time" min = {minTime} required value = {this.state.end_time} onChange={this.handleEndTime}/>
+ <input id = "end_time"   type="time" min ={this.state.start_time} required value = {this.state.end_time} onChange={this.handleEndTime}/>
  <input id = "description" type="text" minlength = {1} required placeholder="Description" value = {this.state.description} onChange={this.handleDesc}/>
-<Button disabled = {((document.getElementById("description")&&document.getElementById("start_day")&&document.getElementById("end_time")&&document.getElementById("start_time"))&&(!document.getElementById("start_day").checkValidity()||!document.getElementById("end_time").checkValidity()||!document.getElementById("start_time").checkValidity()||document.getElementById("description").value.length<1))} color="blue" onClick ={this.submitData}>Create</Button>
+<Button disabled = {((document.getElementById("description")&&document.getElementById("start_day")&&document.getElementById("end_time")&&document.getElementById("start_time"))&&(!document.getElementById("start_day").checkValidity()||!document.getElementById("end_time").checkValidity()||!document.getElementById("start_time").checkValidity()))} color="blue" onClick ={this.submitData}>Create</Button>
 </div>
 </div>
 </div>

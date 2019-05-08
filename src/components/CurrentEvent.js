@@ -26,6 +26,7 @@ class CurrentEvent extends Component {
 			"current_event_info":""
 		}
 		this.leaveRegisteredEvent = this.leaveRegisteredEvent.bind(this);
+    this.to12 = this.to12.bind(this);
 	}
 
     leaveRegisteredEvent(){
@@ -46,6 +47,14 @@ class CurrentEvent extends Component {
       console.log(res);
 
     })
+  }
+  to12(tm){
+      let timeString = tm + ":00";
+      let H = +timeString.substr(0, 2);
+      let h = H % 12 || 12;
+      let ampm = (H < 12 || H === 24) ? "AM" : "PM";
+      timeString = h + timeString.substr(2, 3) + ampm;
+      return timeString;
   }
     componentDidMount(){
     let a = this;
@@ -78,14 +87,16 @@ class CurrentEvent extends Component {
   		return(<div></div>)
   	else
 	  	return(
-				<div>
+				<div className="currWrap">
 					<div className="current_event">
 						<div className = "current_event_wrap">
 							<div className = "current_event_wrap_grid">
 								<div className = "current_event_wrap_grid_enc_a">
 									<div className = "event_pic"></div>
 									<p className = "brief_intro">LITLUNCH AT</p>
-									<p className = "restaurant_time">3:00pm</p>
+									<p className = "restaurant_time">{this.to12(this.state.current_event_info[this.state.current_event].start)}</p>
+                  <p className = "restaurant_time">to</p>
+                  <p className = "restaurant_time">{this.to12(this.state.current_event_info[this.state.current_event].end)}</p>
 									<p className = "restaurant_name">{this.state.current_event_info[this.state.current_event].restaurant}</p>
 									<p className = "restaurant_location">{this.state.current_event_info[this.state.current_event].location}</p>
 									<p className = "restaurant_desc">{this.state.current_event_info[this.state.current_event].description}</p>
